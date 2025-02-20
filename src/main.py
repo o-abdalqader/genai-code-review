@@ -4,7 +4,7 @@ Main module for handling the code review process using ChatGPT and GitHub API.
 
 import logging
 from clients.github_client import GithubClient
-from clients.openai_client import OpenAIClient
+from clients.openai_client import AzureOpenAIClient
 from utils.helpers import get_env_variable
 
 # Configure logging
@@ -21,9 +21,10 @@ def main():
         return
 
     github_client = GithubClient(env_vars['GITHUB_TOKEN'])
-    openai_client = OpenAIClient(env_vars['OPENAI_MODEL'],
+    openai_client = AzureOpenAIClient(env_vars['OPENAI_MODEL'],
                                  env_vars['OPENAI_TEMPERATURE'],
                                  env_vars['OPENAI_MAX_TOKENS'],
+                                 "2024-08-01-preview",
                                  env_vars.get('AZURE_OPENAI_ENDPOINT'))
 
     language = env_vars.get('LANGUAGE', 'en')
@@ -94,7 +95,7 @@ def process_files(github_client, openai_client, pr_id, language, custom_prompt):
 
     Args:
         github_client (GithubClient): The GitHub client instance.
-        openai_client (OpenAIClient): The OpenAI client instance.
+        openai_client (AzureOpenAIClient): The OpenAI client instance.
         pr_id (int): The pull request ID.
         language (str): The language for the review.
         custom_prompt (str, optional): Custom prompt for the code review.
@@ -116,7 +117,7 @@ def process_patch(github_client, openai_client, pr_id, language, custom_prompt):
 
     Args:
         github_client (GithubClient): The GitHub client instance.
-        openai_client (OpenAIClient): The OpenAI client instance.
+        openai_client (AzureOpenAIClient): The OpenAI client instance.
         pr_id (int): The pull request ID.
         language (str): The language for the review.
         custom_prompt (str, optional): Custom prompt for the code review.
@@ -135,7 +136,7 @@ def analyze_commit_files(github_client, openai_client, pr_id, commit, language, 
 
     Args:
         github_client (GithubClient): The GitHub client instance.
-        openai_client (OpenAIClient): The OpenAI client instance.
+        openai_client (AzureOpenAIClient): The OpenAI client instance.
         pr_id (int): The pull request ID.
         commit (Commit): The commit object.
         language (str): The language for the review.
@@ -164,7 +165,7 @@ def analyze_patch(github_client, openai_client, pr_id, patch_content, language, 
 
     Args:
         github_client (GithubClient): The GitHub client instance.
-        openai_client (OpenAIClient): The OpenAI client instance.
+        openai_client (AzureOpenAIClient): The OpenAI client instance.
         pr_id (int): The pull request ID.
         patch_content (str): The patch content.
         language (str): The language for the review.
