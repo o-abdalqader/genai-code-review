@@ -44,6 +44,14 @@ inputs:
     description: 'Azure OpenAI Endpoint'
     required: true
     default: ''
+  api_key:
+    description: 'API Key for Azure OpenAI'
+    required: true
+    default: ''
+  api_version:
+    description: 'API Version for Azure OpenAI'
+    required: true
+    default: ''
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -58,3 +66,5 @@ runs:
     LANGUAGE: ${{ inputs.language }}
     CUSTOM_PROMPT: ${{ inputs.custom_prompt }}
     AZURE_OPENAI_ENDPOINT: ${{ inputs.azure_openai_endpoint }}
+    API_KEY: ${{ inputs.api_key }}
+    API_VERSION: ${{ inputs.api_version }}

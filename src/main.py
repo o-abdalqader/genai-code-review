@@ -25,7 +25,8 @@ def main():
                                  env_vars['OPENAI_TEMPERATURE'],
                                  env_vars['OPENAI_MAX_TOKENS'],
                                  "2024-08-01-preview",
-                                 env_vars.get('AZURE_OPENAI_ENDPOINT'))
+                                 env_vars.get('AZURE_OPENAI_ENDPOINT'),
+                                 env_vars['API_KEY'])
 
     language = env_vars.get('LANGUAGE', 'en')
     custom_prompt = env_vars.get('CUSTOM_PROMPT')
@@ -67,7 +68,8 @@ def get_env_vars():
         'MODE': (str, True),
         'LANGUAGE': (str, True),
         'CUSTOM_PROMPT': (str, False),
-        'AZURE_OPENAI_ENDPOINT': (str, False)
+        'AZURE_OPENAI_ENDPOINT': (str, False),
+        'API_KEY': (str, True)
     }
 
     env_vars = {}
