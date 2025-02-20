@@ -24,7 +24,7 @@ def main():
     openai_client = AzureOpenAIClient(env_vars['OPENAI_MODEL'],
                                  env_vars['OPENAI_TEMPERATURE'],
                                  env_vars['OPENAI_MAX_TOKENS'],
-                                 "2024-08-01-preview",
+                                 env_vars['API_VERSION'],
                                  env_vars.get('AZURE_OPENAI_ENDPOINT'),
                                  env_vars['OPENAI_API_KEY'])
 
@@ -69,6 +69,7 @@ def get_env_vars():
         'LANGUAGE': (str, True),
         'CUSTOM_PROMPT': (str, False),
         'AZURE_OPENAI_ENDPOINT': (str, False),
+        'API_VERSION': (str, False),
     }
 
     env_vars = {}

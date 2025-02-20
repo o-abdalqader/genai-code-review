@@ -40,7 +40,7 @@ inputs:
     description: "Custom prompt to use for generating responses. If not provided, a default prompt will be used based on the mode."
     required: false
     default: ""
-  AZURE_OPENAI_ENDPOINT:
+  azure_openai_endpoint:
     description: 'Azure OpenAI Endpoint'
     required: true
     default: ''

@@ -36,12 +36,12 @@ class AzureOpenAIClient:
             self.api_key = api_key
             logging.info(
                 "Azure OpenAI client initialized successfully, "
-                "Model: %s, temperature: %s, max tokens: %s, API version: %s, Azure endpoint: %s, API key: %s",
+                "Model: %s, temperature: %s, max tokens: %s, API version: %s, Azure endpoint: %s",
                 self.model,
                 self.temperature,
                 self.max_tokens,
-                self.azure_endpoint,
                 self.api_version,
+                self.azure_endpoint,
             )
         except Exception as e:
             logging.error("Error initializing Azure OpenAI client: %s", e)
