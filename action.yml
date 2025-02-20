@@ -40,6 +40,10 @@ inputs:
     description: "Custom prompt to use for generating responses. If not provided, a default prompt will be used based on the mode."
     required: false
     default: ""
+  azure_openai_endpoint:
+    description: 'Azure OpenAI Endpoint'
+    required: true
+    default: ''
 runs:
   using: "docker"
   image: "Dockerfile"
@@ -53,3 +57,4 @@ runs:
     MODE: ${{ inputs.mode }}
     LANGUAGE: ${{ inputs.language }}
     CUSTOM_PROMPT: ${{ inputs.custom_prompt }}
+    AZURE_OPENAI_ENDPOINT: ${{ inputs.azure_openai_endpoint }}
