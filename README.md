@@ -150,6 +150,12 @@ See [the documentation](https://docs.github.com/en/actions/writing-workflows/cho
 - **Default**: `""` (empty)
 - **Usage**: Provide specific guidelines or focus areas for the AI's code review.
 
+#### 1.3.6. `azure_openai_endpoint`
+
+- **Description**: The Azure OpenAI endpoint to use for generating responses.
+- **Default**: `""` (empty)
+- **Usage**: Provide the Azure OpenAI endpoint if you want to use Azure's OpenAI service.
+
 ## 2. How it works
 
 ### 2.1. files
