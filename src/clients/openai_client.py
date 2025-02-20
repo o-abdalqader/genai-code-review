@@ -26,7 +26,7 @@ class AzureOpenAIClient:
             azure_endpoint (str): The Azure OpenAI endpoint.
         """
         try:
-            self.client = AzureOpenAI()
+            self.client = AzureOpenAI(api_version=api_version, azure_endpoint=azure_endpoint)
             self.model = model
             self.temperature = temperature
             self.max_tokens = max_tokens
