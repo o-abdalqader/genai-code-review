@@ -23,7 +23,8 @@ def main():
     github_client = GithubClient(env_vars['GITHUB_TOKEN'])
     openai_client = OpenAIClient(env_vars['OPENAI_MODEL'],
                                  env_vars['OPENAI_TEMPERATURE'],
-                                 env_vars['OPENAI_MAX_TOKENS'])
+                                 env_vars['OPENAI_MAX_TOKENS'],
+                                 env_vars.get('AZURE_OPENAI_ENDPOINT'))
 
     language = env_vars.get('LANGUAGE', 'en')
     custom_prompt = env_vars.get('CUSTOM_PROMPT')
@@ -64,7 +65,8 @@ def get_env_vars():
         'OPENAI_MAX_TOKENS': (int, True),
         'MODE': (str, True),
         'LANGUAGE': (str, True),
-        'CUSTOM_PROMPT': (str, False)
+        'CUSTOM_PROMPT': (str, False),
+        'AZURE_OPENAI_ENDPOINT': (str, False)
     }
 
     env_vars = {}

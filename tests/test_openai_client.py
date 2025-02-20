@@ -35,6 +35,31 @@ class TestOpenAIClient(unittest.TestCase):
         with self.assertRaises(Exception) as context:
             self.client.generate_response("This will fail.")
         self.assertTrue("API error" in str(context.exception))
+
+    @patch('clients.openai_client.OpenAI')
+    def test_initialization_with_azure_endpoint(self, MockOpenAI):
+        client = OpenAIClient(model="gpt-3.5-turbo", temperature=0.7, max_tokens=150, azure_endpoint="https://azure.openai.endpoint")
+        self.assertEqual(client.azure_endpoint, "https://azure.openai.endpoint")
+
+    @patch('clients.openai_client.OpenAI')
+    def test_generate_response_with_azure_endpoint(self, MockOpenAI):
+        mock_openai = MockOpenAI.return_value
+        mock_openai.chat.completions.create.return_value = MagicMock(choices=[MagicMock(message=MagicMock(content="Test response"))])
+        client = OpenAIClient(model="gpt-3.5-turbo", temperature=0.7, max_tokens=150, azure_endpoint="https://azure.openai.endpoint")
+        
+        prompt = "Hello, how are you?"
+        response = client.generate_response(prompt)
+        self.assertEqual(response, "Test response")
+        mock_openai.chat.completions.create.assert_called_once_with(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are an expert Developer."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.7,
+            max_tokens=150,
+            api_base="https://azure.openai.endpoint"
+        )
         
 if __name__ == '__main__':
     unittest.main()
