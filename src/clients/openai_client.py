@@ -14,9 +14,9 @@ class AzureOpenAIClient:
     A client for interacting with the Azure OpenAI API to generate responses using a specified model.
     """
 
-    def __init__(self, model, temperature, max_tokens, api_version, azure_endpoint):
+    def __init__(self, model, temperature, max_tokens, api_version, azure_endpoint, api_key):
         """
-        Initialize the AzureOpenAIClient with model, temperature, max tokens, api_version, and azure_endpoint.
+        Initialize the AzureOpenAIClient with model, temperature, max tokens, api_version, azure_endpoint, and api_key.
 
         Args:
             model (str): The Azure OpenAI model to use.
@@ -24,22 +24,25 @@ class AzureOpenAIClient:
             max_tokens (int): The maximum number of tokens to generate.
             api_version (str): The API version to use.
             azure_endpoint (str): The Azure OpenAI endpoint.
+            api_key (str): The API key for authentication.
         """
         try:
-            self.client = AzureOpenAI(api_version=api_version, azure_endpoint=azure_endpoint)
+            self.client = AzureOpenAI(api_version=api_version, azure_endpoint=azure_endpoint, api_key=api_key)
             self.model = model
             self.temperature = temperature
             self.max_tokens = max_tokens
             self.api_version = api_version
             self.azure_endpoint = azure_endpoint
+            self.api_key = api_key
             logging.info(
                 "Azure OpenAI client initialized successfully, "
-                "Model: %s, temperature: %s, max tokens: %s, API version: %s, Azure endpoint: %s",
+                "Model: %s, temperature: %s, max tokens: %s, API version: %s, Azure endpoint: %s, API key: %s",
                 self.model,
                 self.temperature,
                 self.max_tokens,
                 self.api_version,
-                self.azure_endpoint
+                self.azure_endpoint,
+                self.api_key
             )
         except Exception as e:
             logging.error("Error initializing Azure OpenAI client: %s", e)
@@ -69,7 +72,8 @@ class AzureOpenAIClient:
                 temperature=self.temperature,
                 max_tokens=self.max_tokens,
                 api_version=self.api_version,
-                azure_endpoint=self.azure_endpoint
+                azure_endpoint=self.azure_endpoint,
+                api_key=self.api_key
             )
             logging.info("Response generated successfully.")
             return response.choices[0].message.content
